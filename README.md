@@ -16,8 +16,8 @@ Template workshop vibe coding Creative Hub App Talent (CHAT) 2026. Repo ini beri
 6. **Clone repo ke laptop.**
 
    ```bash
-   git clone https://github.com/<akunmu>/<nama-repo>.git
-   cd <nama-repo>
+   git clone https://github.com/<zaldi2504>/<zaldi-ekraf-umkm>.git
+   cd <zaldi-ekraf-umkm>
    npm install
    ```
 
