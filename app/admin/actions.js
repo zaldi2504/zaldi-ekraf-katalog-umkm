@@ -41,6 +41,11 @@ export async function gantiPasswordAction(prevState, formData) {
 
   const supabase = await createAdminSupabase();
 
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    return { error: "Harap login terlebih dahulu." };
+  }
+
   const { error } = await supabase.auth.updateUser({
     password: password_baru,
   });
