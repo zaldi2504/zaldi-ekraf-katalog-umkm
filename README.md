@@ -58,7 +58,7 @@ Urutan yang disarankan: US-01, US-02, US-03, US-04, US-05, US-06, lalu fitur bon
 
 ## Menyesuaikan dengan usahamu
 
-- Identitas toko: ubah `lib/toko.js`.
+- Identitas toko: ubah `lib/Kopi NusanJaya.js`.
 - Warna: ubah bagian `@theme` di `app/globals.css` (lihat `DESIGN.md`).
 - Produk: ubah langsung di Supabase > **Table Editor > produk**.
 
@@ -76,7 +76,7 @@ Urutan yang disarankan: US-01, US-02, US-03, US-04, US-05, US-06, lalu fitur bon
 
 ## Tentang aplikasi ini
 
-- **Nama usaha:**
-- **Pembuat:**
-- **Link aplikasi:**
-- **Fitur bonus yang dikerjakan:**
+- **Nama usaha:** Kopi NusanJaya
+- **Pembuat:** Zaldi
+- **Link aplikasi:** https://zaldi-ekraf-katalog-umkm-git-main-zaldi2504.vercel.app/
+- **Fitur bonus yang dikerjakan:** US-07, US-08, US-09, US-10, US-11, US-12, US-13, US-14

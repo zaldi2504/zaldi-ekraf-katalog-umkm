@@ -4,11 +4,14 @@ Catat prompt penting selama membangun aplikasi: apa yang kamu minta, hasilnya, d
 
 ## US-01 Katalog dari database
 
-**Prompt:** (Telah dikerjakan sebelumnya)
+**Prompt:**
+Baca docs/user-stories.md bagian US-01. Hubungkan app/page.jsx dengan tabel "produk" di Supabase menggunakan Server Component dan fungsi createServerSupabase di lib/supabase/server. Ambil semua kolom produk, urutkan berdasarkan created_at ascending, format harga dengan format rupiah, dan tampilkan kartu produk atau pesan kosong jika belum ada data.
 
-**Hasil:** (Telah dikerjakan sebelumnya)
+**Hasil:**
+Halaman utama / berhasil menampilkan seluruh produk secara dinamis dari database Supabase di sisi server.
 
-**Perbaikan:** (Telah dikerjakan sebelumnya)
+**Perbaikan:**
+Menambahkan penanganan error try/catch dan pesan fallback jika query database mengalami kendala.
 
 ## US-02 Detail produk
 
@@ -67,6 +70,90 @@ Proteksi URL untuk direktori `/admin` berfungsi menggunakan `proxy.js` (penggant
 - Membetulkan eksport nama fungsi dari `middleware` menjadi `proxy` sesuai Next 16 API `middleware-to-proxy`.
 - Menghilangkan `CatatanBelumAktif` di dashboard admin.
 
-## Debugging dan fitur bonus
+## US-07 List produk di halaman admin dari database [SENDIRI]
 
-Tambahkan bagian baru untuk setiap error yang kamu perbaiki atau fitur bonus yang kamu kerjakan.
+**Prompt:**
+Ubah app/admin/page.jsx agar mengambil daftar produk dari tabel "produk" di Supabase menggunakan createAdminSupabase, bukan menggunakan produkContoh dari lib/data-contoh.js. Pastikan hanya admin terautentikasi yang bisa mengakses halaman. Tampilkan data tersebut di TabelProduk.
+
+**Hasil:**
+Daftar produk di halaman dashboard admin terintegrasi penuh ke database Supabase dan menampilkan data produk secara realtime.
+
+**Perbaikan:**
+Mengganti impor `produkContoh` dengan query Supabase serta menambahkan server-side auth guard.
+
+## US-08 Tambah produk (harus terkunci login) [SENDIRI]
+
+**Prompt:**
+Buat Server Action tambahProdukAction di app/admin/actions.js yang memeriksa otentikasi admin, memvalidasi input nama dan harga, lalu menyimpan produk baru ke database Supabase. Hubungkan ke form di app/admin/produk/baru/page.jsx dan hapus CatatanBelumAktif.
+
+**Hasil:**
+Admin dapat menambahkan produk baru langsung dari halaman /admin/produk/baru yang tersimpan ke Supabase dan dialihkan kembali ke /admin.
+
+**Perbaikan:**
+Menambahkan validasi di server dan revalidatePath untuk cache Next.js.
+
+## US-09 Ubah produk (harus terkunci login) [SENDIRI]
+
+**Prompt:**
+Perbarui app/admin/produk/[id]/ubah/page.jsx untuk mengambil data produk berdasarkan id dari database Supabase dan menampilkannya di FormProduk. Buat Server Action ubahProdukAction di app/admin/actions.js untuk memperbarui data produk di Supabase dengan proteksi login admin.
+
+**Hasil:**
+Admin dapat mengedit nama, harga, kategori, foto, dan deskripsi produk yang sudah ada di database.
+
+**Perbaikan:**
+Menghubungkan form edit ke database asli dan menghapus CatatanBelumAktif.
+
+## US-10 Hapus produk (harus terkunci login) [SENDIRI]
+
+**Prompt:**
+Buat Server Action hapusProdukAction di app/admin/actions.js yang menghapus produk dari database Supabase jika admin sudah login. Tambahkan konfirmasi konfirmasi dialog sebelum menghapus di komponen TabelProduk.
+
+**Hasil:**
+Tombol Hapus meminta konfirmasi pengguna dan menghapus produk dari database dengan aman.
+
+**Perbaikan:**
+Membuat komponen TombolHapusProduk dengan konfirmasi browser dan useTransition.
+
+## US-11 Filter kategori atau pencarian [SENDIRI]
+
+**Prompt:**
+Buat komponen KatalogInteraktif di components/KatalogInteraktif.jsx yang memungkinkan pengunjung memfilter produk berdasarkan kategori (pills) dan melakukan pencarian teks berdasarkan nama produk secara instan. Pasang di app/page.jsx.
+
+**Hasil:**
+Pengunjung dapat mencari produk dan menyaring produk berdasarkan kategori secara reaktif dan interaktif.
+
+**Perbaikan:**
+Menyediakan state kata kunci, daftar kategori dinamis dari database, dan pesan jika produk tidak ditemukan.
+
+## US-12 Pilih jumlah atau varian [SENDIRI]
+
+**Prompt:**
+Tingkatkan components/TombolWhatsApp.jsx agar pengunjung di halaman detail produk dapat memilih jumlah produk (counter + / -) dan memilih varian (Original, Dingin, Hangat) sebelum memesan, serta menghitung total harga yang otomatis dimasukkan ke dalam template pesan WhatsApp.
+
+**Hasil:**
+Pengunjung dapat memilih varian dan kuantitas, dengan pesan WhatsApp yang otomatis terisi detail pesanan dan total rupiah.
+
+**Perbaikan:**
+Menambahkan state interaktif pada TombolWhatsApp dan perhitungan harga otomatis.
+
+## US-13 Bisa di-install di HP (PWA) [SENDIRI]
+
+**Prompt:**
+Buat konfigurasi Web App Manifest di app/manifest.js dan public/manifest.json dengan ikon dari public/icons (icon-192.png dan icon-512.png). Tambahkan meta tag PWA, appleWebApp, dan theme-color di app/layout.jsx.
+
+**Hasil:**
+Aplikasi katalog UMKM kini memenuhi standar PWA dan dapat di-install di layar utama smartphone.
+
+**Perbaikan:**
+Menambahkan link manifest dan Apple touch icon di layout utama.
+
+## US-14 Deskripsi produk dibuat AI [SENDIRI]
+
+**Prompt:**
+Buat Server Action buatDeskripsiAIAction di app/admin/actions.js yang menggunakan Gemini API untuk membuat deskripsi produk secara otomatis berdasarkan nama dan kategori produk. Tambahkan tombol 'Buat deskripsi dengan AI' di components/FormProduk.jsx.
+
+**Hasil:**
+Admin dapat menekan tombol AI saat menambah atau mengubah produk untuk membuat deskripsi produk yang menarik secara otomatis.
+
+**Perbaikan:**
+Menyediakan integrasi Gemini API dengan fallback template deskripsi cerdas jika API key belum dikonfigurasi.

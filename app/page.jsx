@@ -1,9 +1,9 @@
-﻿import KartuProduk from "@/components/KartuProduk";
 import { createServerSupabase } from "@/lib/supabase/server";
 import { toko } from "@/lib/toko";
+import KatalogInteraktif from "@/components/KatalogInteraktif";
 
 // US-01: daftar produk diambil dari tabel "produk" di Supabase, di sisi server.
-// Halaman dirender saat request supaya katalog selalu mengikuti isi database.
+// US-11: filter kategori dan pencarian nama produk.
 export const dynamic = "force-dynamic";
 
 export default async function HalamanKatalog() {
@@ -54,11 +54,7 @@ export default async function HalamanKatalog() {
             Belum ada produk
           </p>
         ) : (
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-            {daftarProduk.map((produk) => (
-              <KartuProduk key={produk.id} produk={produk} />
-            ))}
-          </div>
+          <KatalogInteraktif daftarProduk={daftarProduk} />
         )}
       </section>
     </>
